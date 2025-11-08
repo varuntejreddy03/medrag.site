@@ -645,7 +645,7 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-700/30">
-                      {(cases.length > 0 ? cases : consultations).map((consultation, index) => {
+                      {(cases.length > 0 ? cases : consultations).map((consultation: any, index: number) => {
                         // Handle both real cases and mock data
                         const caseData = cases.length > 0 ? {
                           id: consultation.id,
@@ -658,9 +658,9 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                           date: new Date(consultation.created_at || Date.now()).toLocaleDateString(),
                           confidence: consultation.confidence || 0,
                           status: consultation.status,
-                          priority: 'medium'
+                          priority: 'medium' as 'high' | 'medium' | 'low'
                         } : consultation;
-                        const statusConfig = {
+                        const statusConfig: Record<string, any> = {
                           completed: { color: 'text-green-400', bg: 'bg-green-500/20', border: 'border-green-500/50' },
                           diagnosed: { color: 'text-green-400', bg: 'bg-green-500/20', border: 'border-green-500/50' },
                           'in-progress': { color: 'text-blue-400', bg: 'bg-blue-500/20', border: 'border-blue-500/50' },
@@ -669,7 +669,7 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                         
                         const currentStatus = statusConfig[caseData.status] || statusConfig.pending;
                         
-                        const priorityConfig = {
+                        const priorityConfig: Record<string, string> = {
                           high: 'text-red-400',
                           medium: 'text-yellow-400', 
                           low: 'text-green-400'
@@ -687,7 +687,7 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                               <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center border border-blue-500/30">
                                   <span className="text-blue-400 font-semibold text-sm">
-                                    {caseData.patientName.split(' ').map(n => n[0]).join('')}
+                                    {caseData.patientName.split(' ').map((n: string) => n[0]).join('')}
                                   </span>
                                 </div>
                                 <div>
@@ -767,7 +767,7 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                     <p className="text-gray-300 mb-6">Manage ongoing patient consultations and send diagnosis reports</p>
                     
                     <div className="grid gap-4">
-                      {(cases.length > 0 ? cases : consultations).map((consultation) => {
+                      {(cases.length > 0 ? cases : consultations).map((consultation: any) => {
                         const caseData = cases.length > 0 ? {
                           id: consultation.id,
                           patientName: consultation.full_name || consultation.patientName,
@@ -817,7 +817,7 @@ const HealthcareDashboard: React.FC<HealthcareDashboardProps> = ({ onStartDiagno
                     <p className="text-gray-300 mb-6">View all completed and archived cases</p>
                     
                     <div className="space-y-3">
-                      {(cases.length > 0 ? cases : consultations).filter(c => c.status === 'completed' || c.status === 'diagnosed').map((consultation) => (
+                      {(cases.length > 0 ? cases : consultations).filter((c: any) => c.status === 'completed' || c.status === 'diagnosed').map((consultation: any) => (
                         <div key={consultation.id} className="p-4 rounded-lg bg-slate-800/50 border border-slate-700/50">
                           <div className="flex items-center justify-between">
                             <div>
