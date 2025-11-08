@@ -446,7 +446,7 @@ const Step2ClinicalManifestations: React.FC<any> = ({ onNext, initialData }) => 
   };
 
   const handleVoiceTranscript = (text: string) => {
-    setManualHistory(prev => prev + ' ' + text);
+    setManualHistory((prev: string) => prev + ' ' + text);
   };
 
   const handleNext = () => {
