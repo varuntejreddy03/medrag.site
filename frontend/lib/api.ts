@@ -1,6 +1,6 @@
 // API client for MedRAG backend integration
 
-const API_BASE_URL ='http://18.212.60.60:8000';
+const API_BASE_URL = 'http://100.88.41.29:8000';
 
 export interface PatientData {
   fullName: string;
@@ -210,6 +210,52 @@ class MedRAGAPI {
   // Export case
   async exportCase(caseId: string): Promise<any> {
     return this.request(`/export/${caseId}`);
+  }
+
+  // Send verification code
+  async sendVerification(email: string): Promise<{ message: string }> {
+    return this.request('/send-verification', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  }
+
+  // Verify code
+  async verifyCode(email: string, code: string): Promise<{ message: string }> {
+    return this.request('/verify-code', {
+      method: 'POST',
+      body: JSON.stringify({ email, code }),
+    });
+  }
+
+  // Auth endpoints
+  async sendAuthCode(email: string): Promise<{ message: string }> {
+    return this.request('/auth/send-code', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  }
+
+  async verifyAuthCode(email: string, code: string): Promise<{ message: string }> {
+    return this.request('/auth/verify', {
+      method: 'POST',
+      body: JSON.stringify({ email, code }),
+    });
+  }
+
+  // Send patient email
+  async sendPatientEmail(patientData: any): Promise<{ message: string }> {
+    return this.request('/send-patient-email', {
+      method: 'POST',
+      body: JSON.stringify(patientData),
+    });
+  }
+
+  // Clear chat session
+  async clearChat(sessionId: string): Promise<{ message: string }> {
+    return this.request(`/chat/${sessionId}`, {
+      method: 'DELETE',
+    });
   }
 }
 
