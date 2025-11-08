@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, ArrowRight, Brain, Shield, Zap, Loader2 } from 'lucide-react';
 import { RainbowButton } from '@/components/ui/rainbow-button';
@@ -20,12 +20,25 @@ const LandingLogin: React.FC<LandingLoginProps> = ({ onSuccess }) => {
   const [showOtp, setShowOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setShowLogin(false);
+    setShowOtp(false);
+    setEmail('');
+    setName('');
+    setOtp('');
+  }, []);
+
   const sendOtp = async (email: string) => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://18.212.60.60:8000';
+      console.log('Sending request to:', `${API_URL}/send-verification`);
       const response = await fetch(`${API_URL}/send-verification`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ email })
       });
       const data = await response.json();
@@ -44,10 +57,15 @@ const LandingLogin: React.FC<LandingLoginProps> = ({ onSuccess }) => {
 
   const verifyOtp = async (email: string, code: string) => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://18.212.60.60:8000';
+      console.log('Sending request to:', `${API_URL}/verify-code`);
       const response = await fetch(`${API_URL}/verify-code`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ email, code })
       });
       const data = await response.json();

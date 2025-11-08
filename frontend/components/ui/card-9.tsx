@@ -33,13 +33,13 @@ const cardVariants = {
   hover: {
     scale: 1.03,
     boxShadow: "0px 15px 30px -5px hsl(var(--card) / 0.2)",
-    transition: { type: "spring", stiffness: 300, damping: 20 },
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 },
   },
 };
 
 const arrowVariants = {
   initial: { x: 0 },
-  hover: { x: 4, transition: { type: "spring", stiffness: 400, damping: 15 } },
+  hover: { x: 4, transition: { type: "spring" as const, stiffness: 400, damping: 15 } },
 };
 
 // 5. CREATE THE COMPONENT

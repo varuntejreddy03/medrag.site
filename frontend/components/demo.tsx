@@ -79,7 +79,7 @@ const DemoOne = () => {
       <AnimatePresence mode="wait">
         {currentView === 'login' && (
           <motion.div
-            key="login"
+            key={`login-${currentView}`}
             initial="initial"
             animate="in"
             exit="out"
@@ -141,7 +141,7 @@ const DemoOne = () => {
             transition={pageTransition}
             className="w-full min-h-screen"
           >
-            <DiagnosticDashboard onBack={() => handleViewChange('clinical-wizard')} />
+            <DiagnosticDashboard onBack={() => handleViewChange('dashboard')} />
           </motion.div>
         )}
       </AnimatePresence>

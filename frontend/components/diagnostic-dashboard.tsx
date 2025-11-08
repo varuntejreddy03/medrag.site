@@ -197,7 +197,7 @@ const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({ onBack }) => 
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                   </motion.div>
-                  Back to Dashboard
+                  ← Back to Dashboard
                 </RainbowButton>
               </motion.div>
 

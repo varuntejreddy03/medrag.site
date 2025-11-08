@@ -14,7 +14,7 @@ export function LandingHero({ onSuccess }: LandingHeroProps) {
         <HeroGeometric />
       </div>
       
-      <div className="relative z-20">
+      <div className="relative z-50">
         <SignInPage onSuccess={onSuccess} />
       </div>
     </div>
