@@ -128,7 +128,7 @@ const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({ onBack }) => 
         ...parsed.manifestations?.symptoms?.map((s: string, i: number) => ({
           id: `${i + 2}`,
           text: s,
-          severity: (i === 0 ? 'high' : i === 1 ? 'medium' : 'low') as const
+          severity: (i === 0 ? 'high' : i === 1 ? 'medium' : 'low') as 'high' | 'medium' | 'low'
         })) || []
       ];
     }
@@ -432,9 +432,9 @@ const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({ onBack }) => 
                         </CardHeader>
                         <CardContent>
                           <div className="flex flex-wrap gap-2">
-                            {(diagnosis?.questions || mockData.questions.map(q => q.text)).map((question, index) => (
+                            {(diagnosis?.questions || mockData.questions.map((q: Question) => q.text)).map((question: string | Question, index: number) => (
                               <motion.button
-                                key={typeof question === 'string' ? question : question.id}
+                                key={typeof question === 'string' ? `q-${index}` : (question as Question).id}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: index * 0.1 }}
@@ -442,7 +442,7 @@ const DiagnosticDashboard: React.FC<DiagnosticDashboardProps> = ({ onBack }) => 
                                 whileTap={{ scale: 0.95 }}
                                 className="px-4 py-2 text-sm bg-gray-500/30 hover:bg-gray-500/50 border border-gray-400/50 rounded-full transition-all text-white font-medium drop-shadow-md"
                               >
-                                {typeof question === 'string' ? question : question.text}
+                                {typeof question === 'string' ? question : (question as Question).text}
                               </motion.button>
                             ))}
                           </div>
