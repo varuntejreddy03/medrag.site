@@ -24,6 +24,9 @@ backend/models/*.pkl
 backend/models/*.json
 backend/models/*.xml
 
+# Large data files
+backend/data/train.csv
+
 # Node.js
 node_modules/
 .next/
