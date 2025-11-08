@@ -21,7 +21,8 @@ const LandingLogin: React.FC<LandingLoginProps> = ({ onSuccess }) => {
 
   const sendOtp = async (email: string) => {
     try {
-      const response = await fetch('http://localhost:8000/send-verification', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/send-verification`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -42,7 +43,8 @@ const LandingLogin: React.FC<LandingLoginProps> = ({ onSuccess }) => {
 
   const verifyOtp = async (email: string, code: string) => {
     try {
-      const response = await fetch('http://localhost:8000/verify-code', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/verify-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code })
