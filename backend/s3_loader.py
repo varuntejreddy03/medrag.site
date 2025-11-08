@@ -1,6 +1,9 @@
 import boto3
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def download_from_s3():
     """Download large model files from S3 if not present locally"""
