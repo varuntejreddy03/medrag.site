@@ -26,6 +26,7 @@ models/
 
 # Data files (store in S3)
 data/
+*.csv
 
 # IDE
 .vscode/
@@ -39,6 +40,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Nested backend folder
-backend/
