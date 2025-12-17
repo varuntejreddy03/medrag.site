@@ -43,10 +43,10 @@ class APIClient {
 
   // Auth endpoints
   async signup(data: SignupData) {
-    const res = await fetch(`${API_URL}/auth/signup`, {
+    const res = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: this.getHeaders(),
-      body: JSON.stringify(data),
+      body: JSON.stringify({ username: data.email, password: data.password }),
     });
     return res.json();
   }
@@ -56,7 +56,7 @@ class APIClient {
       method: 'POST',
       headers: this.getHeaders(),
       credentials: 'include',
-      body: JSON.stringify(data),
+      body: JSON.stringify({ username: data.email, password: data.password }),
     });
     return res.json();
   }
@@ -99,7 +99,7 @@ class APIClient {
 
   // Diagnosis endpoints
   async createDiagnosis(data: DiagnosisRequest) {
-    const res = await fetch(`${API_URL}/diagnosis/`, {
+    const res = await fetch(`${API_URL}/api/v1/diagnosis/start`, {
       method: 'POST',
       headers: this.getHeaders(),
       credentials: 'include',
@@ -110,7 +110,7 @@ class APIClient {
   }
 
   async getUserDiagnoses() {
-    const res = await fetch(`${API_URL}/diagnosis/`, {
+    const res = await fetch(`${API_URL}/api/v1/patients`, {
       headers: this.getHeaders(),
       credentials: 'include',
     });
@@ -119,8 +119,8 @@ class APIClient {
     return res.json();
   }
 
-  async getDiagnosis(id: number) {
-    const res = await fetch(`${API_URL}/diagnosis/${id}`, {
+  async getDiagnosis(id: string) {
+    const res = await fetch(`${API_URL}/api/v1/diagnosis/${id}`, {
       headers: this.getHeaders(),
       credentials: 'include',
     });
@@ -150,7 +150,7 @@ class APIClient {
   }
 
   async healthCheck() {
-    const res = await fetch(`${API_URL}/health`);
+    const res = await fetch(`${API_URL}/api/v1/health`);
     return res.json();
   }
 
